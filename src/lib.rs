@@ -16,6 +16,7 @@ use pre_define::const_define::general;
 
 pub fn entry() {
     app_log4rs_init();
+    handler::handle_entry();
 }
 
 /// setup log4rs from conf file:
