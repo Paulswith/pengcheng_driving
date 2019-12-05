@@ -27,7 +27,7 @@ pub fn fit_request_header() -> HeaderMap {
 
 /// add single header
 fn add_header(header: &mut HeaderMap, key: HeaderName, value: &str) {
-    match HeaderValue::from_str(headers::USER_AGENT) {
+    match HeaderValue::from_str(value) {
         Err(err) => warn!("Fail parse: {} header-key: {} from value: {}", err, key, value),
         Ok(value) => { header.insert(key, value); },
     }

@@ -41,3 +41,19 @@ appenders:
         pattern: 'logs/others.log.{}'
         base: 1
         count: 10
+loggers:
+  hyper:
+    level: info
+    appenders:
+      - others
+    additive: false
+  serde_xml_rs:
+    level: info
+    appenders:
+      - others
+    additive: false
+  tokio_reactor:
+    level: info
+    appenders:
+      - others
+    additive: false

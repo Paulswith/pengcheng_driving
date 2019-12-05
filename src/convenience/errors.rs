@@ -1,19 +1,18 @@
 /*
   create at 2019/12/4 by 'itachy'
 */
+error_chain! {
+    foreign_links {
+        JsonError(serde_json::error::Error);
+        ReqwestError(reqwest::Error);
+        SerdeXmlError(serde_xml_rs::Error);
+    }
 
-pub mod convert {
-    error_chain! {
-        foreign_links {
-            IoError(::std::io::Error);
-//            CommomError(::std::error::Error);
-            JsonError(serde_json::error::Error);
+    errors {
+        XmlParseFailed(content: String) {
+            description("Xml parse failed"),
+            display("Xml parse failed from str: {}", content),
         }
-//
-//        errors {
-//            DeserializeError(v: String) {
-//
-//            }
-//        }
     }
 }
+
