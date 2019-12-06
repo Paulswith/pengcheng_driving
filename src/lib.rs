@@ -13,7 +13,7 @@ extern crate serde;
 extern crate toml;
 use pre_define::const_define::general;
 use convenience::errors;
-use data_model::init_config::InitConfig;
+use data_model::init_config::Config;
 
 
 pub fn entry() {
@@ -29,7 +29,7 @@ fn app_log4rs_init() {
         .expect("Initialize log config error");
 }
 
-fn parse_config(from_file_path: &str) -> errors::Result<InitConfig> {
+fn parse_config(from_file_path: &str) -> errors::Result<Config> {
     let ref content = std::fs::read_to_string(from_file_path)?;
     Ok(
         toml::from_str(content)?

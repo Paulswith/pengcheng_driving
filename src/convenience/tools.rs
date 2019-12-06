@@ -4,6 +4,7 @@ create at 2019/12/4 by itachy
 use std::collections::HashMap;
 use rand::Rng;
 use super::errors;
+use chrono::{DateTime, Local};
 
 
 /// nonce
@@ -21,7 +22,9 @@ pub fn flat_to_url_query_param(params: &HashMap<&str, &str>) -> String {
     flat_param_vec.join("&")
 }
 
-/// TODO: 应该从接口请求回来的.
-pub fn reserved_id() -> String {
-    String::from("")
+/// newest date is today + 2
+pub fn get_newest_order_date() -> String {
+    let today: DateTime<Local> = Local::now();
+    let newest_order_date = today + time::Duration::days(2);
+    newest_order_date.format("%Y-%m-%d").to_string()
 }

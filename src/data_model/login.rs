@@ -1,6 +1,9 @@
 /*
   create at 2019/12/6 by 'itachy'
 */
+use crate::convenience::traits::*;
+
+
 #[derive(Debug, Clone, serde::Deserialize)]
 #[serde(rename="Root")]
 pub struct Login {
@@ -48,8 +51,8 @@ struct Daum {
     student_no: String,
 }
 
-impl Login {
-    pub fn is_login_succeed(&self) -> bool {
+impl RequestStatus for Login {
+    fn is_req_succeed(&self) -> bool {
         self.is_succeed
     }
 }

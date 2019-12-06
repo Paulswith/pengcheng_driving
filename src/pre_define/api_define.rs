@@ -10,6 +10,9 @@ pub const GET_API_CODE: &str = "http://appwebsrv01.22168168.com/PCMIS_App.asmx/G
 pub const GET_LOGIN: &str = "http://appwebsrv01.22168168.com/PCMIS_App.asmx/GetLogin";
 // EXAMPLE: GET http://appwebsrv01.22168168.com/PCMIS_App.asmx/GetLogin?AppPassword=XXXXXXXXXX&AppPhoneNumber=111111111111&nonce=1000000532&signature=cccccccccc8335d26d4efd468da5cfdac005f&timestamp=1259840392
 
+pub const GET_TEACH_INFO: &str = "http://appwebsrv01.22168168.com/PCMIS_App.asmx/GetStudentBindTeachInfo";
+// EXAMPLE: GET http://appwebsrv01.22168168.com/PCMIS_App.asmx/GetStudentBindTeachInfo?AppRecordID=EQESXZCSADSACXZD81C22C5D10230D&nonce=1000000532&signature=cccccccccc8335d26d4efd468da5cfdac005f&timestamp=1259840392
+
 /// 查询可预约排期: phase 1 2 3 对应上午 下午 晚上
 pub const GET_RESERVED_TIME_LIST: &str = "http://appwebsrv01.22168168.com/PCMIS_App.asmx/GetReservedTimeList";
 // EXAMPLE: GET http://appwebsrv01.22168168.com/PCMIS_App.asmx/GetReservedTimeList?AppRecordID=EQESXZCSADSACXZD81C22C5D10230D&Phase=1&ReservedDate=2019-12-01&TeachID=pc100&nonce=1000000532&signature=cccccccccc8335d26d4efd468da5cfdac005f&timestamp=1259840392

@@ -10,6 +10,10 @@ error_chain! {
     }
 
     errors {
+        InvalidWrapResponse(wrap_rsp: String) {
+            description("invalid wrap response"),
+            display("invalid wrap response, raw rsp content: '{}'", wrap_rsp),
+        }
         XmlParseFailed(content: String) {
             description("Xml parse failed"),
             display("Xml parse failed from str: {}", content),

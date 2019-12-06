@@ -10,8 +10,8 @@ pub mod general {
 // network relation
 pub mod network {
     pub mod headers {
-        pub const USER_AGENT: &str = "PCDriving/2.25 (iPhone; iOS 11.3.1; Scale/2.00)";
-        pub const HOST: &str = "appwebsrv01.22168168.com";
+        pub const USER_AGENT:         &str = "PCDriving/2.25 (iPhone; iOS 11.3.1; Scale/2.00)";
+        pub const HOST:               &str = "appwebsrv01.22168168.com";
     }
 
     pub mod param_keys {

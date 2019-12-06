@@ -1,6 +1,8 @@
 /*
   create at 2019/12/3 by 'itachy'
 */
+pub mod teach_info;
+pub mod reserved;
 pub mod init_config;
 pub mod api_code;
 pub mod login;
@@ -16,6 +18,10 @@ impl ResponseWrap {
     }
 
     pub fn from(wrap_content: &str) -> errors::Result<Self> {
+        // when content is not valid xml, dummy_xml::parser::parse_str will IOOB
+        if !wrap_content.starts_with("<") {
+            bail!(errors::ErrorKind::InvalidWrapResponse(format!("{}", wrap_content)));
+        }
         match dummy_xml::parser::parse_str(wrap_content) {
             Ok(ref document) if document.root().first_child().is_some() => {
                 let child = document.root().first_child().unwrap();

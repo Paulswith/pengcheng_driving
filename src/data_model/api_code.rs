@@ -1,6 +1,9 @@
 /*
   create at 2019/12/3 by 'itachy'
 */
+use crate::convenience::traits::*;
+
+
 #[derive(Debug, serde::Deserialize)]
 pub struct ApiCodeRsp {
     #[serde(rename = "IsSuccessed")]
@@ -39,5 +42,11 @@ impl ApiCodeRspData {
 
     pub fn nonce(&self) -> u64 {
         self.nonce
+    }
+}
+
+impl RequestStatus for ApiCodeRsp {
+    fn is_req_succeed(&self) -> bool {
+        self.is_succeed
     }
 }
