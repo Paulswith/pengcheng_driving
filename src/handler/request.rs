@@ -5,7 +5,8 @@ use crate::convenience::{errors, tools};
 use crate::network::basic;
 use crate::data_model::{ResponseWrap,
                         api_code::*,
-                        login::*};
+                        login::*,
+                        init_config::*};
 use crate::pre_define::api_define::*;
 use super::request_combine;
 
@@ -31,8 +32,8 @@ fn request_api_code(client: &reqwest::Client) -> errors::Result<ApiCodeRsp> {
 }
 
 
-fn pure_login(client: &reqwest::Client, api_code_data: &ApiCodeRspData) -> errors::Result<bool> {
-    let ref url = request_combine::combine_login_uri(GET_LOGIN, &api_code_data);
+fn pure_login(client: &reqwest::Client, api_code_data: &ApiCodeRspData, login_config: &InitConfig) -> errors::Result<bool> {
+    let ref url = request_combine::combine_login_uri(GET_LOGIN, &api_code_data, login_config);
     debug!("Request login use url: {}", url);
     let mut rsp = client.get(url).send()?;
     let ref rsp_content = rsp.text()?;
@@ -42,14 +43,14 @@ fn pure_login(client: &reqwest::Client, api_code_data: &ApiCodeRspData) -> error
     Ok(login.is_login_succeed())
 }
 
-pub(super) fn login(client: &reqwest::Client) -> bool {
+pub(super) fn login(client: &reqwest::Client, login_config: &InitConfig) -> bool {
     match request_signature(client) {
         None => {
             error!("request_signature is None");
             false
         },
         Some(ref api_code_data) => {
-            match pure_login(client, &api_code_data) {
+            match pure_login(client, &api_code_data, login_config) {
                 Err(err) => {
                     error!("login failed");
                     false
@@ -59,3 +60,15 @@ pub(super) fn login(client: &reqwest::Client) -> bool {
         }
     }
 }
+
+
+//// 获取最新的预约列表 TODO: before running, Check Config is than chosen exist
+//// return will_chosen_ReservedID
+//pub(super) fn fetch_newest_reserved_time_list(client: &reqwest::Client) ->  {
+//
+//}
+//
+/////
+//pub(super) fn apply_newest_car_oder(sprint_sec: u32) {
+//
+//}

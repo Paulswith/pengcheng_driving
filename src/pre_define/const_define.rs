@@ -4,6 +4,7 @@
 // most general inhere
 pub mod general {
     pub const DEFAULT_LOG4RS_PATH: &str = "conf/log4rs.yaml";
+    pub const DEFAULT_CONFIG_PATH: &str = "conf/conf.toml";
 }
 
 // network relation
@@ -20,29 +21,11 @@ pub mod network {
         pub const K_SIGNATURE:        &str = "signature";
         pub const K_TIMESTAMP:        &str = "timestamp";
         pub const K_APP_RECORD_ID:    &str = "AppRecordID";
+        pub const K_RESERVED_ID:      &str = "ReservedID";
         pub const K_PHASE:            &str = "Phase";
         pub const K_RESERVED_DATE:    &str = "ReservedDate";
         pub const K_TEACH_ID:         &str = "TeachID";
     }
 
     pub const REQ_DEFAULT_TIME_OUT_SECOND: u64 = 3;
-}
-
-// private define, TODO: need detach into config file
-pub mod account_info {
-    // 登录密码
-    pub const APP_PASSWORD: &str = "ThisMyPs12";
-    // 登录手机号
-    pub const APP_PHONE_NUMBER: &str = "18812345678";
-    // 上午1 下午2 晚上3
-    pub const PHASE: &str = "1";
-
-    // TODO: 应该提取默认当天?
-    // yyyy-mm-dd
-    pub const RESERVED_DATE: &str = "2019-12-06";
-
-    /* 没法不抓包获取的那些参数 */
-    // 教练ID似乎是?
-    pub const TEACH_ID: &str = "pc10086";
-    pub const APP_RECORD_ID: &str = "ASD2131237ASDASZXCAS321ASDSA";
 }

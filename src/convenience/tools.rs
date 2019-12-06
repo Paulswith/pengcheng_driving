@@ -20,3 +20,8 @@ pub fn flat_to_url_query_param(params: &HashMap<&str, &str>) -> String {
         .collect();
     flat_param_vec.join("&")
 }
+
+/// TODO: 应该从接口请求回来的.
+pub fn reserved_id() -> String {
+    String::from("")
+}

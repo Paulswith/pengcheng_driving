@@ -1,0 +1,9 @@
+[authentication]
+phone_number = "13312345432"
+password = "password123"
+
+[application]
+#TODO: APP的UUID, 可能没校验随便来个位数对得上的就可以, 32位(大写字母+数字)
+app_record_id = "OIOIASDSDSDSDSDSD1234444412321212"
+# 预约的整点时间: 如 '14:00:00'
+order_start_time = "13:00:00"

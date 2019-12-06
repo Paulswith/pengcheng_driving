@@ -4,10 +4,17 @@
 use std::time::SystemTime;
 
 
-/// 根据每天搞事的时间, 返回一个精准的时间戳
-pub fn cal_timestamp_at_today() -> u64 {
-    //TODO: 这里需要返回一个今天18点的时间戳
-    1575453600
+/// 获取最新的预约日期
+pub fn newest_orderable_date() -> String {
+    //TODO: 自动生成 2d后
+    String::from("2019-12-06")
+}
+
+
+/// 获取最新的预约timestamp
+pub fn fetch_newest_apply_timestamp() -> u64 {
+    //TODO: 根据配置的目标时间, 来生成
+    1575626400
 }
 
 /// 从配置加载, 返回每天搞事的时间点

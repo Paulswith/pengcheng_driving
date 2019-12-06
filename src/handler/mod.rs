@@ -6,17 +6,19 @@ mod request_combine;
 use crate::convenience::{errors, tools};
 use crate::network::basic;
 use crate::data_model::{ResponseWrap,
-                        api_code::*};
+                        api_code::*,
+                        init_config::*};
 use crate::pre_define::api_define::*;
 
 
-pub fn handle_entry() {
+pub fn handle_entry(config: &InitConfig) {
     match basic::construct_client() {
         Err(err) => error!("Construct client failed: {}", err),
         Ok(ref client) => {
-            if request::login(client) {
+            if request::login(client, config) {
                 println!("Login success.");
             }
+            // 获取想要的预约的时间点的record-id
         }
     }
 

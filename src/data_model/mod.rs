@@ -1,6 +1,7 @@
 /*
   create at 2019/12/3 by 'itachy'
 */
+pub mod init_config;
 pub mod api_code;
 pub mod login;
 use serde::Deserialize;
