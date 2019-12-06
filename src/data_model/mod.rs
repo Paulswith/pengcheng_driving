@@ -5,23 +5,29 @@ pub mod api_code;
 use serde::Deserialize;
 use crate::convenience::errors;
 
-/*  parse from xml */
-/*
-#[derive(Debug, serde::Deserialize)]
-#[serde(rename = "string")]
-pub struct ResponseWrap {
-    #[serde(rename = "_")]
-    body: String,                    // contain one ApiCodeRspCore
 
-//    #[serde(rename = "@version")]
-//    string: api_code::ApiCodeRsp,
-}
-
+pub struct ResponseWrap(String);
 
 impl ResponseWrap {
+    fn new(raw: &str) -> Self {
+        Self(raw.to_string())
+    }
+
+    pub fn from(wrap_content: &str) -> errors::Result<Self> {
+        match dummy_xml::parser::parse_str(wrap_content) {
+            Ok(ref document) if document.root().first_child().is_some() => {
+                let child = document.root().first_child().unwrap();
+                Ok(
+                    ResponseWrap::new(child.value())
+                )
+            }
+            _ => bail!(errors::ErrorKind::XmlParseFailed(format!("{:?}", wrap_content))),
+        }
+    }
+
+    /// parse body by passing struct
     pub fn body<'a, T:'a>(&'a self) -> errors::Result<T> where T: Deserialize<'a> {
-        debug!("my body: '{}'", &self.body);
-        Ok(serde_json::from_str(&self.body)?)
+        debug!("Unwrap body: '{}'", &self.0);
+        Ok(serde_json::from_str(&self.0)?)
     }
 }
-*/

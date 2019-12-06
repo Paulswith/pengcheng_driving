@@ -20,14 +20,3 @@ pub fn flat_to_url_query_param(params: &HashMap<&str, &str>) -> String {
         .collect();
     flat_param_vec.join("&")
 }
-
-/// parse wrap
-pub fn unwrap_body(wrap_content: &str) -> errors::Result<String> {
-    match dummy_xml::parser::parse_str(wrap_content) {
-        Ok(ref document) if document.root().first_child().is_some() => {
-            let child = document.root().first_child().unwrap();
-            Ok(child.value().to_string())
-        }
-        _ => bail!(errors::ErrorKind::XmlParseFailed(format!("{:?}", wrap_content))),
-    }
-}

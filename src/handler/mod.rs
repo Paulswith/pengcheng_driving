@@ -22,7 +22,7 @@ pub fn handle_entry() {
 fn entry() -> errors::Result<()> {
     let client = basic::construct_client()?;
     let api_code = request_api_code(&client)?;
-    info!("signature: {}", api_code.signature());
+    info!("fetch signature: {}", api_code.signature());
     Ok(())
 }
 
@@ -32,6 +32,6 @@ fn request_api_code(client: &reqwest::Client) -> errors::Result<ApiCodeRsp> {
     let mut rsp = client.get(url).send()?;
     let ref rsp_content = rsp.text()?;
     debug!("Response body text: '{}'", rsp_content);
-    let ref body = tools::unwrap_body(rsp_content)?;
-    Ok(serde_json::from_str(body)?)
+    let rsp = ResponseWrap::from(rsp_content)?;
+    Ok(rsp.body()?)
 }
