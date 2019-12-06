@@ -5,7 +5,6 @@ error_chain! {
     foreign_links {
         JsonError(serde_json::error::Error);
         ReqwestError(reqwest::Error);
-        SerdeXmlError(serde_xml_rs::Error);
     }
 
     errors {

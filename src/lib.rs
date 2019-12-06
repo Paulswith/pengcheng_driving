@@ -10,7 +10,6 @@ mod handler;
 #[macro_use] extern crate log;
 #[macro_use] extern crate error_chain;
 extern crate serde;
-extern crate serde_xml_rs;
 use pre_define::const_define::general;
 
 

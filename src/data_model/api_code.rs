@@ -20,9 +20,24 @@ pub struct ApiCodeRspData {
     nonce: u64,
 }
 
-/// only impl concerned
 impl ApiCodeRsp {
+    pub fn data(self) -> ApiCodeRspData {
+        self.data
+    }
+}
+
+
+/// impl concerned
+impl ApiCodeRspData {
     pub fn signature(&self) -> &str {
-        &self.data.signature
+        &self.signature
+    }
+
+    pub fn timestamp(&self) -> u64 {
+        self.timestamp
+    }
+
+    pub fn nonce(&self) -> u64 {
+        self.nonce
     }
 }

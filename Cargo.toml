@@ -14,5 +14,4 @@ reqwest = "0.9"
 dummy_xml = "0.1"
 serde_json = "1.0"
 error-chain = "0.12"
-serde-xml-rs = "0.3"
 serde = { version = "1.0", features = ["derive"] }
