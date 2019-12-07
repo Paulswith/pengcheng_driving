@@ -3,12 +3,14 @@
 */
 mod request;
 mod uri_combine;
-use crate::convenience::{errors, tools};
+use crate::convenience::{errors, tools, time};
 use crate::network::basic;
 use crate::data_model::{ResponseWrap,
                         api_code::*,
                         init_config::*};
 use crate::pre_define::api_define::*;
+use std::thread::sleep;
+use std::time::Duration;
 
 
 pub fn handle_entry(config: &Config) {
@@ -45,6 +47,19 @@ fn handle_by_step(client: &reqwest::Client, config: &Config) {
         return;
     }
     info!("Fetch newest_reserved_time_list succeed.");
-    println!("{:?}", reserved.unwrap());
     // step 4. loop, until  the time point is approaching, request order quickly.
+    // 4.1 convert today.hour to timestamp, calculate the target tx=$(timestamp - x)
+    let target_timestamp = time::timestamp_from_today(config.hour_of_order_start_time());
+    let beforehand_timestamp = target_timestamp - (config.beforehand_order_second() as i64);
+    // 4.2 loop, until current timestamp >= tx
+    info!("Looping, until archive sprint timestamp: {}", beforehand_timestamp);
+    loop {
+        if time::timestamp_for_now() >= beforehand_timestamp {
+            info!("Start sprint request");
+            // （beforehand_order_second / 0.2 => beforehand_order_second * 5） + 1，间隔0.2秒发送一次请求
+            // 4.3 sprint request, but if target equal '考试', break out('').
+        }
+        sleep(Duration::from_secs_f32(0.7));
+    }
 }
+

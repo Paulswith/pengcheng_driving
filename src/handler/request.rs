@@ -141,8 +141,10 @@ pub(super) fn fetch_newest_reserved_time_list(client: &reqwest::Client,
         }
     }
 }
-//
-/////
-//pub(super) fn apply_newest_car_oder(sprint_sec: u32) {
-//
-//}
+
+///
+pub(super) fn apply_car_order(client: &reqwest::Client,
+                              config: &Config,
+                              reserved: &ReservedTime) {
+
+}

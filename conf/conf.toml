@@ -1,9 +1,11 @@
 [authentication]
-phone_number = "13312345432"
-password = "password123"
+phone_number = "10000000000"
+password = "10000000"
 
 [application]
 #TODO: APP的UUID, 可能没校验随便来个位数对得上的就可以, 32位(大写字母+数字)
-app_record_id = "OIOIASDSDSDSDSDSD1234444412321212"
-# 预约的整点时间: 如 '14:00:00'
-order_start_time = "13:00:00"
+app_record_id = "WEQPEOQPWEOPQOPODSADASDNSADASDA"
+# 预约的整点时间: 如 '14:00:00' => 14
+order_start_time = 10
+# 需要冲刺的时间，到了这段时间，就会开始递交大多请求。second: 2秒挺好的
+beforehand_order_second = 2

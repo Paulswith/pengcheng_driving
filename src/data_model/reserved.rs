@@ -23,7 +23,7 @@ struct Data {
 }
 
 #[derive(Debug, Clone, serde::Deserialize)]
-struct ReservedTime {
+pub struct ReservedTime {
     #[serde(rename = "RecordID")]
     record_id: String,
     #[serde(rename = "TeacherID")]
@@ -64,6 +64,16 @@ struct ExaminList {
     examin_type: String,
     #[serde(rename = "Name")]
     name: String,
+}
+
+impl ReservedTime {
+    pub fn record_id(&self) -> &str {
+        &self.record_id
+    }
+
+//    pub fn valid_memo(&self) -> &str {
+//        &self.valid_memo
+//    }
 }
 
 

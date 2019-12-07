@@ -20,6 +20,7 @@ struct Authentication {
 struct Application {
     app_record_id: String,
     order_start_time: u32,
+    beforehand_order_second: u32,
 }
 
 impl Config {
@@ -38,6 +39,12 @@ impl Config {
     pub fn order_start_time(&self) -> String {
         format!("{}:00:00", self.application.order_start_time)
     }
+
+    pub fn hour_of_order_start_time(&self) -> u32 {
+        self.application.order_start_time
+    }
+
+    pub fn beforehand_order_second(&self) -> u32 { self.application.beforehand_order_second }
 
     pub fn phase(&self) -> String {
         match self.application.order_start_time {

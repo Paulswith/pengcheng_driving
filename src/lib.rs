@@ -18,7 +18,8 @@ use data_model::init_config::Config;
 
 pub fn entry() {
     app_log4rs_init();
-    let ref config = parse_config(general::DEFAULT_CONFIG_PATH).unwrap();
+    let ref config = parse_config(general::DEFAULT_CONFIG_PATH)
+        .expect("Unable parse config file");
     info!("Init config: {:?}", config);
     handler::handle_entry(config);
 }
