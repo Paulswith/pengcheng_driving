@@ -1,14 +1,14 @@
 /*
   create at 2019/12/6 by 'itachy'
 */
-use crate::convenience::{errors, tools};
-use crate::network::basic;
+use crate::convenience::errors;
 use crate::data_model::{ResponseWrap,
                         api_code::*,
                         login::*,
                         init_config::*,
                         reserved::*,
-                        teach_info::*};
+                        teach_info::*,
+                        order_info::*};
 use crate::pre_define::api_define::*;
 use crate::convenience::traits::*;
 use super::uri_combine;
@@ -58,7 +58,10 @@ pub(super) fn login(client: &reqwest::Client, config: &Config) -> bool {
         },
         Some(ref api_code_data) => {
             match pure_login(client, &api_code_data, config) {
-                Err(err) => false,
+                Err(err) => {
+                    error!("Login error: {}", err);
+                    false
+                },
                 Ok(res) => res,
             }
         }
@@ -143,8 +146,48 @@ pub(super) fn fetch_newest_reserved_time_list(client: &reqwest::Client,
 }
 
 ///
-pub(super) fn apply_car_order(client: &reqwest::Client,
-                              config: &Config,
-                              reserved: &ReservedTime) {
+pub(super) fn pure_apply_car_order(client: &reqwest::Client,
+                                         api_code_data: &ApiCodeRspData,
+                                         config: &Config,
+                                         reserved_id: &str) -> errors::Result<OrderInfo> {
+    let ref url = uri_combine::combine_order_uri(ADD_CAR_ORDER_INFO_HOUS_IOS,
+                                                          &api_code_data,
+                                                          config,
+                                                          reserved_id);
+    debug!("Request apply_car_order use url: {}", url);
+    let mut rsp = client.get(url).send()?;
+    let ref rsp_content = rsp.text()?;
+    debug!("Response<pure_apply_car_order> body text: '{}'", rsp_content);
+    let unwrap_rsp = ResponseWrap::from(rsp_content)?;
+    Ok(
+        unwrap_rsp.body()?
+    )
+}
 
+///
+pub(super) fn apply_car_order(client: &reqwest::Client,
+                                    config: &Config,
+                                    reserved_id: &str) -> bool {
+    match request_signature(client) {
+        None => {
+            error!("apply_car_order, request_signature is None");
+            false
+        },
+        Some(ref api_code_data) => {
+            match pure_apply_car_order(client, api_code_data, config, reserved_id) {
+                Err(err) => {
+                    error!("Fetch apply_car_order failed: {}", err);
+                    false
+                }
+                Ok(ref order_info) => {
+                    if order_info.is_req_succeed() {
+                        true
+                    } else {
+                        debug!("apply_car_order, response body: {:?}", order_info);
+                        false
+                    }
+                }
+            }
+        }
+    }
 }

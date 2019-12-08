@@ -60,16 +60,18 @@ pub(super) fn combine_reserved_time_list(url: &str,
     format!("{}?{}", url, flat_to_url_query_param(params))
 }
 
-///// order uri
-//pub(super) fn combine_order_uri(url: &str, api_code_data: &ApiCodeRspData) -> String {
-//    let ref mut params = HashMap::new();
-//    let ref reserved_id = reserved_id();
-//    let ref nonce = api_code_data.nonce().to_string();
-//    let ref timestamp = api_code_data.timestamp().to_string();
-//    params.insert(K_APP_RECORD_ID, APP_RECORD_ID);
-//    params.insert(K_RESERVED_ID, reserved_id);
-//    params.insert(K_SIGNATURE, api_code_data.signature());
-//    params.insert(K_NONCE, nonce);
-//    params.insert(K_TIMESTAMP, timestamp);
-//    format!("{}?{}", url, flat_to_url_query_param(params))
-//}
+/// order uri
+pub(super) fn combine_order_uri(url: &str,
+                                api_code_data: &ApiCodeRspData,
+                                config: &Config,
+                                reserved_id: &str) -> String {
+    let ref mut params = HashMap::new();
+    let ref nonce = api_code_data.nonce().to_string();
+    let ref timestamp = api_code_data.timestamp().to_string();
+    params.insert(K_APP_RECORD_ID, config.app_record_id());
+    params.insert(K_RESERVED_ID, reserved_id);
+    params.insert(K_SIGNATURE, api_code_data.signature());
+    params.insert(K_NONCE, nonce);
+    params.insert(K_TIMESTAMP, timestamp);
+    format!("{}?{}", url, flat_to_url_query_param(params))
+}

@@ -3,7 +3,7 @@
 */
 use std::time::Duration;
 use reqwest::header::{HeaderMap, HeaderValue, HeaderName};
-use reqwest::header::{REFERER, USER_AGENT, HOST};
+use reqwest::header::{USER_AGENT, HOST};
 use crate::pre_define::const_define::network::{headers, REQ_DEFAULT_TIME_OUT_SECOND};
 
 

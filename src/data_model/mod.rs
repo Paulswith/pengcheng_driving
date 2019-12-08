@@ -1,6 +1,7 @@
 /*
   create at 2019/12/3 by 'itachy'
 */
+pub mod order_info;
 pub mod teach_info;
 pub mod reserved;
 pub mod init_config;

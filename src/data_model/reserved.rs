@@ -66,26 +66,17 @@ struct ExaminList {
     name: String,
 }
 
-impl ReservedTime {
-    pub fn record_id(&self) -> &str {
-        &self.record_id
-    }
-
-//    pub fn valid_memo(&self) -> &str {
-//        &self.valid_memo
-//    }
-}
-
-
 impl Reserved {
-    pub fn reserved_id(&self, by_start_time: &str) -> Option<String> {
+    pub fn find_valid_reserved_id(&self, hour_of_order_time: &str) -> Option<String> {
+        debug!("Find start equal to {}", hour_of_order_time);
+        let mut res: Option<String> = None;
         for record in self.data.reserved_time.iter() {
-            match &record.car_order_id {
-                Some(car_order_id) => return Some(car_order_id.to_owned()),
-                _ => (),
+            if record.start_time == hour_of_order_time && record.is_valid == "1" {
+                res = Some(record.record_id.to_owned());
+                break;
             }
         }
-        None
+        res
     }
 }
 
