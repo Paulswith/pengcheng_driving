@@ -27,5 +27,5 @@ pub mod network {
         pub const K_TEACH_ID:         &str = "TeachID";
     }
 
-    pub const REQ_DEFAULT_TIME_OUT_SECOND: u64 = 3;
+    pub const REQ_DEFAULT_TIME_OUT_SECOND: u64 = 1;
 }
