@@ -181,9 +181,10 @@ pub(super) fn apply_car_order(client: &reqwest::Client,
                 }
                 Ok(ref order_info) => {
                     if order_info.is_req_succeed() {
+                        info!("Response msg: {}", order_info.message());
                         true
                     } else {
-                        debug!("apply_car_order, response body: {:?}", order_info);
+                        debug!("Apply_car_order, response msg: {}", order_info.message());
                         false
                     }
                 }

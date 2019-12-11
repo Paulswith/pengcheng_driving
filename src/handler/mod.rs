@@ -62,7 +62,8 @@ fn handle_by_step(client: &reqwest::Client, config: &Config) {
     let target_timestamp = time::timestamp_from_today(config.hour_of_order_start_time());
     let beforehand_timestamp = target_timestamp - (config.beforehand_order_second() as i64);
     // 4.2 loop, until current timestamp >= tx
-    info!("Looping, target_timestamp={} until archive sprint timestamp: {}", target_timestamp, beforehand_timestamp);
+    info!("Found target time: {}", config.order_start_time());
+    info!("Looping,  target_timestamp={} until archive sprint timestamp: {}", target_timestamp, beforehand_timestamp);
     loop {
         if time::timestamp_for_now() >= beforehand_timestamp {
             info!("Start sprint request");

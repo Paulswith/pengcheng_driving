@@ -71,7 +71,8 @@ impl Reserved {
         debug!("Find start equal to {}", hour_of_order_time);
         let mut res: Option<String> = None;
         for record in self.data.reserved_time.iter() {
-            if record.start_time == hour_of_order_time && record.is_valid == "1" {
+            // 待预约阶段, isValid发现是4
+            if record.start_time == hour_of_order_time && record.is_valid != "0" {
                 res = Some(record.record_id.to_owned());
                 break;
             }

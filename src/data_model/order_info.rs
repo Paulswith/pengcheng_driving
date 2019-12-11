@@ -95,3 +95,9 @@ impl RequestStatus for OrderInfo {
         self.is_succeed
     }
 }
+
+impl OrderInfo {
+    pub fn message(&self) -> &str {
+        &self.message
+    }
+}
