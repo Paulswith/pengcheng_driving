@@ -29,3 +29,14 @@ pub mod network {
 
     pub const REQ_DEFAULT_TIME_OUT_SECOND: u64 = 1;
 }
+
+pub mod timer {
+    // 每秒发几次
+    pub const SEND_REQUEST_PER_SECOND: u32 = 1;
+
+    // 超过多少秒之前还得发
+    pub const SEND_REQUEST_BEFORE_SECONDS: u32 = 2;
+
+    // 预防心跳导致抢票晚了
+    pub const AVOID_TIMEOUT_FOR_HEART: i64 = 5;
+}
